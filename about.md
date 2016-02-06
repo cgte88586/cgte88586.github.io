@@ -4,12 +4,15 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+### Welcome!
 
-### More Information
+My name is Zhou (Joe) Li and I am a PhD student at [Department of Statistics](http://www.stat.ncsu.edu/), NC State University. I work with Dr. [Lexin Li](http://sph.berkeley.edu/lexin-li) on statistical methods for neuroimaging data analysis. Before moving to North Carolina, I grew up in [Nanjing](http://www.cityofnanjing.com/), China and earned a B.S. in mathematics from [Nanjing University](http://www.nju.edu.cn/english/). In my free time, I enjoy music, video games, running and reading.
 
-A place to include any other types of information that you'd like to include about yourself.
+### Helpful links
+
+* [LinkedIn](https://www.linkedin.com/in/zhouli89)
+* [GitHub](https://github.com/cgte88586)
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[zli15 AT ncsu.edu](mailto:benlz1989@gmail.com)

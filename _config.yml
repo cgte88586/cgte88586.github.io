@@ -6,7 +6,7 @@
 name: Zhou (Joe) Li
 
 # Short bio or description (displayed in the header)
-description: Web Developer from Somewhere
+description: Ph.D. Student of Statistics
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png
@@ -18,11 +18,11 @@ avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/je
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
-  email: benlz1989@gmail.com
+  email: zli15@ncsu.edu
   facebook: benlz1989
   flickr:
   github: cgte88586
-  instagram:
+  instagram: cgte88586
   linkedin: zhouli89
   pinterest:
   rss: # just type anything here for a working RSS icon
