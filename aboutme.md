@@ -1,12 +1,11 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: About me
 ---
 
 ### Welcome!
 
-![Profile Picture]({{ site.baseurl }}/images/profile-pic.jpg "Profile Picture")
+![Profile Picture]({{ site.baseurl }}/img/profile-pic.jpg "Profile Picture")
 
 My name is Zhou (Joe) Li and I am a PhD student at [Department of Statistics](http://www.stat.ncsu.edu/), NC State University. I work with Dr. [Lexin Li](http://sph.berkeley.edu/lexin-li) on statistical methods for neuroimaging data analysis. Before moving to North Carolina, I grew up in [Nanjing](http://www.cityofnanjing.com/), China and earned a B.S. in mathematics from [Nanjing University](http://www.nju.edu.cn/english/). In my free time, I enjoy music, video games, running and reading.
 

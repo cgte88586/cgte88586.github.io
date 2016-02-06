@@ -1,78 +1,146 @@
-#
-# This file contains configuration flags to customize your site
-#
+# --- Serving options --- #
 
-# Name of your site (displayed in the header)
-name: Zhou (Joe) Li
+# url is the full website URL
+# baseurl is the website's URL without the hostname
 
-# Short bio or description (displayed in the header)
-description: Ph.D. Student of Statistics
-
-# URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAIwAAAAJDFkMmUwMTY3LWNkMzYtNGIwZC1iOTFjLWNjMmI2MjFkNTA4ZQ.jpg
-
-#
-# Flags below are optional
-#
-
-# Includes an icon in the footer for each username you enter
-footer-links:
-  dribbble:
-  email: zli15@ncsu.edu
-  facebook:
-  flickr:
-  github: cgte88586
-  instagram:
-  linkedin: zhouli89
-  pinterest:
-  rss: # just type anything here for a working RSS icon
-  twitter: 
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
-  youtube: # channel/<your_long_string> or user/<user-name>
-  googleplus: # anything in your profile username that comes after plus.google.com/
-
-
-# Enter your Disqus shortname (not your username) to enable commenting on posts
-# You can find your shortname on the Settings page of your Disqus account
-disqus: jlispersonalwebsite
-
-# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics: UA-73356853-1
-
-# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
-# Used for Sitemap.xml and your RSS feed
-url: http://cgte88586.github.io
-
-# If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
-# then add in the baseurl here, like this: "/repository-name"
+# If you are building a simple GitHub user page (username.github.io) then use these settings:
+url: "http://cgte88586.github.io"
 baseurl: ""
 
-#
-# !! You don't need to change any of the configuration flags below !!
-#
+# If you are building a GitHub project page then use these settings:
+#url: "http://username.github.io/projectname"
+#baseurl: "/projectname"
 
+# Of course don't forget to change the username and projectname to YOUR username and project
+
+# Name of website
+title: Zhou (Joe) Li
+
+# Short description of your site
+description: My Personal Website
+
+# --- Navigation bar options --- #
+
+# Image to show in the navigation bar - image must be a square (width = height)
+# Remove this parameter if you don't want an image in the navbar
+avatar: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAIwAAAAJDFkMmUwMTY3LWNkMzYtNGIwZC1iOTFjLWNjMmI2MjFkNTA4ZQ.jpg"
+
+# List of links in the navigation bar
+navbar-links:
+  Home: ""
+  About Me: "aboutme"
+  
+# --- Footer options --- #
+
+# Change all these values or delete the ones you don't want.
+# Important: you must keep the "name" parameter, everything else you can remove
+author:
+  name: Some Person
+  email: "zli15@ncsu.edu"
+  facebook: benlz1989  # eg. daattali
+  github: cgte88586    # eg. daattali
+  twitter: yourname   # eg. daattali
+  linkedin: zhouli89  # eg. "pub/dean-attali/8/946/143"
+  stackoverflow: yourlink  # eg. "3943160/daattali"
+ 
+# Select which links to show in the footer
+footer-links-active:
+  rss: true
+  facebook: true
+  email: true
+  twitter: false
+  github: true
+  linkedin: true
+  stackoverflow: false
+
+# How to display the link to the website in the footer
+# Remove this if you don't want a link in the footer
+url-pretty: "http://cgte88586.github.io"  # eg. "deanattali.com/beautiful-jekyll"
+
+# --- Misc --- #
+
+# Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
+disqus: "jlispersonalwebsite"
+
+# Fill in your Google Analytics ID to track your website using GA
+google_analytics: "UA-73356853-1"
+
+# --- Don't need to touch anything below here (but you can if you want) --- #
+
+# Output options (more information on Jekyll's site)
+timezone: "America/New_York"
 markdown: kramdown
 highlighter: rouge
-permalink: /:title/
+permalink: /:year-:month-:day-:title/
+paginate: 5
 
-# The release of Jekyll Now that you're using
-version: v3.0.2
+# Default YAML values (more information on Jekyll's site)
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      comments: true  # add comments to all blog posts
+  -
+    scope:
+      path: "" # all files
+    values:
+      layout: "default"
 
-# Set the Sass partials directory, as we're using @imports
-sass:
-  style: :expanded # You might prefer to minify using :compressed
-
-# Use the following plug-ins
-gems:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
-
-# Exclude these files from your production _site
+# Exclude these files from production site
 exclude:
-    - Gemfile
-    - Gemfile.lock
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - CNAME
+  - Vagrantfile
+
+# prose.io config
+prose:
+  rooturl: '_posts'
+  media: 'img'
+  ignore:
+    - 404.html
     - LICENSE
-    - README.md
-    - CNAME
+    - feed.xml
+    - _config.yml
+    - /_layouts
+    - /_includes
+    - /css
+    - /img
+    - /js
+  metadata:
+    _posts:
+      - name: "layout"
+        field:
+          element: "hidden"
+          value: "post"
+      - name: "title"
+        field:
+          element: "text"
+          label: "Post title"
+          placeholder: "Title"
+          alterable: true
+      - name: "subtitle"
+        field:
+          element: "textarea"
+          label: "Subtitle"
+          placeholder: "A description of your post."
+          alterable: true
+      - name: "date"
+        field:
+          element: "text"
+          label: "Date"
+          help: "Enter date of post."
+          placeholder: "yyyy-mm-dd"
+          alterable: true
+      - name: "published"
+        field:
+          element: "checkbox"
+          label: "Publish"
+          help: "Check to publish post, uncheck to hide."
+  
+# Beautiful Jekyll / Dean Attali
+# 2fc73a3a967e97599c9763d05e564189
