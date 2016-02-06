@@ -1,20 +1,9 @@
 # --- Serving options --- #
-
-# url is the full website URL
-# baseurl is the website's URL without the hostname
-
-# If you are building a simple GitHub user page (username.github.io) then use these settings:
 url: "http://cgte88586.github.io"
 baseurl: ""
 
-# If you are building a GitHub project page then use these settings:
-#url: "http://username.github.io/projectname"
-#baseurl: "/projectname"
-
-# Of course don't forget to change the username and projectname to YOUR username and project
-
 # Name of website
-title: Zhou (Joe) Li
+title: "Zhou (Joe) Li"
 
 # Short description of your site
 description: "Ph.D. Student in Statistics at NC State"
@@ -30,7 +19,6 @@ navbar-links:
   
 # --- Footer options --- #
 
-# Change all these values or delete the ones you don't want.
 author:
   name: Zhou (Joe) Li
   email: "zli15@ncsu.edu"
@@ -39,8 +27,7 @@ author:
   twitter: yourname   # eg. daattali
   linkedin: zhouli89  # eg. "pub/dean-attali/8/946/143"
   stackoverflow: yourlink  # eg. "3943160/daattali"
- 
-# Select which links to show in the footer
+
 footer-links-active:
   rss: true
   facebook: true
@@ -50,8 +37,6 @@ footer-links-active:
   linkedin: true
   stackoverflow: false
 
-# How to display the link to the website in the footer
-# Remove this if you don't want a link in the footer
 # url-pretty: "http://cgte88586.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Misc --- #
