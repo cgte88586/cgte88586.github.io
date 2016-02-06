@@ -25,7 +25,7 @@ author:
   facebook: benlz1989  # eg. daattali
   github: cgte88586    # eg. daattali
   twitter: yourname   # eg. daattali
-  linkedin: zhouli89  # eg. "pub/dean-attali/8/946/143"
+  linkedin: in/zhouli89  # eg. "pub/dean-attali/8/946/143"
   stackoverflow: yourlink  # eg. "3943160/daattali"
 
 footer-links-active:
@@ -54,6 +54,7 @@ timezone: "America/New_York"
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
+gems: [jekyll-paginate]
 paginate: 5
 
 # Default YAML values (more information on Jekyll's site)
@@ -78,48 +79,3 @@ exclude:
   - README.md
   - CNAME
   - Vagrantfile
-
-# prose.io config
-prose:
-  rooturl: '_posts'
-  media: 'img'
-  ignore:
-    - 404.html
-    - LICENSE
-    - feed.xml
-    - _config.yml
-    - /_layouts
-    - /_includes
-    - /css
-    - /img
-    - /js
-  metadata:
-    _posts:
-      - name: "layout"
-        field:
-          element: "hidden"
-          value: "post"
-      - name: "title"
-        field:
-          element: "text"
-          label: "Post title"
-          placeholder: "Title"
-          alterable: true
-      - name: "subtitle"
-        field:
-          element: "textarea"
-          label: "Subtitle"
-          placeholder: "A description of your post."
-          alterable: true
-      - name: "date"
-        field:
-          element: "text"
-          label: "Date"
-          help: "Enter date of post."
-          placeholder: "yyyy-mm-dd"
-          alterable: true
-      - name: "published"
-        field:
-          element: "checkbox"
-          label: "Publish"
-          help: "Check to publish post, uncheck to hide."
