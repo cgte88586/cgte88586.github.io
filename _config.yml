@@ -9,7 +9,7 @@ name: Zhou (Joe) Li
 description: Ph.D. Student of Statistics
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png
+avatar: https://raw.githubusercontent.com/cgte88586/cgte88586.github.io/master/images/profile-pic.png
 
 #
 # Flags below are optional
@@ -19,10 +19,10 @@ avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/je
 footer-links:
   dribbble:
   email: zli15@ncsu.edu
-  facebook: benlz1989
+  facebook:
   flickr:
   github: cgte88586
-  instagram: cgte88586
+  instagram:
   linkedin: zhouli89
   pinterest:
   rss: # just type anything here for a working RSS icon
@@ -34,10 +34,10 @@ footer-links:
 
 # Enter your Disqus shortname (not your username) to enable commenting on posts
 # You can find your shortname on the Settings page of your Disqus account
-disqus:
+disqus: disqus_PTDOQZqRl5
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics:
+google_analytics: UA-73356853-1
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
@@ -58,7 +58,7 @@ highlighter: rouge
 permalink: /:title/
 
 # The release of Jekyll Now that you're using
-version: v1.1.0
+version: v3.0.2
 
 # Set the Sass partials directory, as we're using @imports
 sass:
