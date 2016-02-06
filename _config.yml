@@ -17,12 +17,10 @@ baseurl: ""
 title: Zhou (Joe) Li
 
 # Short description of your site
-description: My Personal Website
+description: "Ph.D. Student in Statistics at NC State"
 
 # --- Navigation bar options --- #
 
-# Image to show in the navigation bar - image must be a square (width = height)
-# Remove this parameter if you don't want an image in the navbar
 avatar: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAIwAAAAJDFkMmUwMTY3LWNkMzYtNGIwZC1iOTFjLWNjMmI2MjFkNTA4ZQ.jpg"
 
 # List of links in the navigation bar
@@ -33,9 +31,8 @@ navbar-links:
 # --- Footer options --- #
 
 # Change all these values or delete the ones you don't want.
-# Important: you must keep the "name" parameter, everything else you can remove
 author:
-  name: Some Person
+  name: Zhou (Joe) Li
   email: "zli15@ncsu.edu"
   facebook: benlz1989  # eg. daattali
   github: cgte88586    # eg. daattali
@@ -55,7 +52,7 @@ footer-links-active:
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "http://cgte88586.github.io"  # eg. "deanattali.com/beautiful-jekyll"
+# url-pretty: "http://cgte88586.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Misc --- #
 
@@ -141,6 +138,3 @@ prose:
           element: "checkbox"
           label: "Publish"
           help: "Check to publish post, uncheck to hide."
-  
-# Beautiful Jekyll / Dean Attali
-# 2fc73a3a967e97599c9763d05e564189
