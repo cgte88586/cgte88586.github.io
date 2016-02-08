@@ -15,8 +15,9 @@ avatar: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAIwAAAAJD
 # List of links in the navigation bar
 navbar-links:
   Home: ""
-  Resume: "http://cgte88586.github.io/resume/"
   About Me: "aboutme"
+  Teaching: "teaching"
+  Resume: "http://cgte88586.github.io/resume/"
   
 # --- Footer options --- #
 
