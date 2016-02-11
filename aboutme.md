@@ -12,7 +12,7 @@ My name is Zhou (Joe) Li and I am a Ph.D. Student in [Statistics at NC State Uni
 ### Helpful links
 
 * [LinkedIn](https://www.linkedin.com/in/zhouli89)
-* [GitHub](https://github.com/cgte88586)
+* [GitHub](https://github.com/zhoujli)
 
 ### Contact me
 
