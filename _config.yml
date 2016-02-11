@@ -1,5 +1,5 @@
 # --- Serving options --- #
-url: "http://cgte88586.github.io"
+url: "http://zhoujli.github.io"
 baseurl: ""
 
 # Name of website
@@ -17,7 +17,7 @@ navbar-links:
   Home: ""
   About Me: "aboutme"
   Teaching: "teaching"
-  Resume: "http://cgte88586.github.io/resume/"
+  Resume: "http://zhoujli.github.io/resume/"
   
 # --- Footer options --- #
 
@@ -25,7 +25,7 @@ author:
   name: Zhou (Joe) Li
   email: "zli15@ncsu.edu"
   facebook: benlz1989  # eg. daattali
-  github: cgte88586    # eg. daattali
+  github: zhoujli    # eg. daattali
   twitter: yourname   # eg. daattali
   linkedin: in/zhouli89  # eg. "pub/dean-attali/8/946/143"
   stackoverflow: yourlink  # eg. "3943160/daattali"
@@ -39,7 +39,7 @@ footer-links-active:
   linkedin: true
   stackoverflow: false
 
-url-pretty: "http://cgte88586.github.io"  # eg. "deanattali.com/beautiful-jekyll"
+url-pretty: "http://zhoujli.github.io"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Misc --- #
 
