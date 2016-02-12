@@ -68,9 +68,6 @@ img {
 </div>
 
 
-<pre class="r"><code>library(Rcpp)
-library(RcppParallel)
-library(rbenchmark)</code></pre>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <p>This post decribes using R Packages <a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a> and <a href="http://rcppcore.github.io/RcppParallel/">RcppParallel</a> to parallely compute the identical by state (IBS) kernel in R. The computation of the IBS kernel involves unavoidable loops, which is known to be painful in R. <code>Rcpp</code> provides R functions as well as C++ classes which offer a seamless integration of R and C++. <code>RcppParallel</code> provides a complete toolkit for creating portable, high-performance parallel algorithms without requiring direct manipulation of operating system threads.</p>
@@ -85,6 +82,7 @@ library(rbenchmark)</code></pre>
 <pre class="r"><code>IBS_kernel_R&lt;- function(X) {
   n &lt;- nrow(X)
   
+  # absolute difference of two numbers
   abs_diff &lt;- function(x1, x2) {
     y &lt;- abs(x1 - x2)
     # exclude missing values
@@ -92,6 +90,7 @@ library(rbenchmark)</code></pre>
   }
   
   out &lt;- matrix(0, n, n)
+  
   for (i in 2:n) {
     for (j in 1:(i-1)) {
       y &lt;- abs_diff(X[i, ], X[j, ])
@@ -196,7 +195,7 @@ Rcpp::NumericMatrix IBS_kernel_C_parallel(Rcpp::NumericMatrix X) {
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
-<p>We now compare the performance of the three implementations: R, Rcpp and parallel Rcpp. The Rcpp version yields a more than 3x speedup over straight R code. The parallel version provides another 3x speedup, amounting to a total gain of 9x compared to the original R version.</p>
+<p>We now compare the performance of the three implementations: R, Rcpp and parallel Rcpp. The Rcpp version yields a 3x speedup over straight R code. The parallel version provides another 3x speedup, amounting to a total gain of 9x compared to the original R version.</p>
 <pre class="r"><code># create a dataset
 set.seed(2016)
 n &lt;- 20
@@ -210,9 +209,9 @@ benchmark(
 replications=100,
 order=&quot;relative&quot;)[, 1:4]</code></pre>
 <pre><code>##                            test replications elapsed relative
-## 3 IBS_kernel_C_parallel(mydata)          100    0.86    1.000
-## 2          IBS_kernel_C(mydata)          100    2.48    2.884
-## 1          IBS_kernel_R(mydata)          100    7.02    8.163</code></pre>
+## 3 IBS_kernel_C_parallel(mydata)          100    0.90    1.000
+## 2          IBS_kernel_C(mydata)          100    2.65    2.944
+## 1          IBS_kernel_R(mydata)          100    7.40    8.222</code></pre>
 </div>
 
 
