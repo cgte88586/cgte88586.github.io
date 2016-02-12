@@ -2,7 +2,9 @@
 title: "An example of Rcpp for parallel calculation of IBS kernel"
 author: "Zhou Li"
 date: "February 12, 2016"
-output: html_document
+output: 
+  html_document:
+    theme: spacelab
 ---
 
 ```{r echo=FALSE}
@@ -49,7 +51,7 @@ IBS_kernel_R<- function(X) {
 
 ## Implementation with Rcpp
 
-Here I re-implement the IBS kernel calculation `IBS_kernel_C()` with `Rcpp` in a `.cpp` file and source it.
+Here I re-implement the IBS kernel calculation `IBS_kernel_C()` in a `.cpp` file and it can be sourced using function `sourceCpp()`.
 
 ```{r engine = 'Rcpp'}
 #include <Rcpp.h>
@@ -85,7 +87,7 @@ NumericMatrix IBS_kernel_C(NumericMatrix X) {
 
 ## Parallel version with RcppParallel
 
-The parallel version `IBS_kernel_C_parallel()` is straightforward to implement with the help of `RMatrix` accessor class provided by `RcppParallel`. The main difference is that the outer loop now starts with the `begin` index passed to the worker function rather than 0.
+The parallel version `IBS_kernel_C_parallel()` is straightforward to implement with the help of `RMatrix` accessor class provided by `RcppParallel`. The main difference to `IBS_kernel_C()` is that the outer loop now starts with the `begin` index passed to the worker function rather than 0.
 
 ```{r engine = 'Rcpp'}
 // [[Rcpp::depends(RcppParallel)]]
