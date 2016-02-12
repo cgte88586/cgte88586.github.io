@@ -150,7 +150,7 @@ Rcpp::NumericMatrix IBS_kernel_C_parallel(Rcpp::NumericMatrix X) {
 
 ## Conclusion
 
-We now compare the performance of the three implementations: R, Rcpp and parallel Rcpp. The Rcpp version yields a 3x speedup over straight R code. The parallel version provides another 3x speedup, amounting to a total gain of 9x compared to the original R version.
+We now compare the performance of the three implementations: R, Rcpp and parallel Rcpp. The run time is recorded on a standard laptop computer with 2.9 GHz Inter i7 CPU (2 cores). The Rcpp version yields a 3x speedup over straight R code. The parallel version provides another 3x speedup, amounting to a total gain of 9x compared to the original R version.
 
 ```{r}
 # create a dataset
