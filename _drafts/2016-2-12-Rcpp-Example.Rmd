@@ -15,7 +15,9 @@ library(rbenchmark)
 
 ## Overview
 
-This post decribes using R Packages [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html) and [RcppParallel](http://rcppcore.github.io/RcppParallel/) to parallely compute the identical by state (IBS) kernel in R. The computation of the IBS kernel involves unavoidable loops, which is known to be painful in R. `Rcpp` provides R functions as well as C++ classes which offer a seamless integration of R and C++. `RcppParallel` provides a complete toolkit for creating portable, high-performance parallel algorithms without requiring direct manipulation of operating system threads.
+"Sometimes R code just isn't fast enough." With the help of the profiling tools such as the [profvis](https://github.com/rstudio/profvis) package, it is possible to figure out the bottlenecks of your code. However some of them (unavoidable loops, recursive functions, etc.) cannot be speed up in R no matter what you do. Another option to improve your code performance is to rewrite key functions in c++.
+
+This post decribes using R Packages [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html) and [RcppParallel](http://rcppcore.github.io/RcppParallel/) to parallely compute the identical by state (IBS) kernel in R. The computation of the IBS kernel involves unavoidable loops, which is known to be painful in R. `Rcpp` makes it very simple to connect C++ to R by providing a clean and approachable API. `RcppParallel` provides a complete toolkit for creating portable, high-performance parallel algorithms without requiring direct manipulation of operating system threads.
 
 ## IBS kernel
 
@@ -150,12 +152,12 @@ Rcpp::NumericMatrix IBS_kernel_C_parallel(Rcpp::NumericMatrix X) {
 
 ## Conclusion
 
-We now compare the performance of the three implementations: R, Rcpp and parallel Rcpp. The run time is recorded on a standard laptop computer with 2.9 GHz Inter i7 CPU (2 cores). The Rcpp version yields a 3x speedup over straight R code. The parallel version provides another 3x speedup, amounting to a total gain of 9x compared to the original R version.
+We now compare the performance of the three implementations: R, Rcpp and parallel Rcpp. The run time is recorded on a standard laptop computer with 2.9 GHz Inter i7 CPU (2 cores). The Rcpp version yields a 2.5x speedup over straight R code. The parallel version provides another 2.5x speedup, amounting to a total gain of 6x compared to the original R version.
 
 ```{r}
 # create a dataset
 set.seed(2016)
-n <- 20
+n <- 10
 p <- 1e4
 mydata <- matrix(sample(c(0:2, NA), n * p, replace=T, prob=c(.2, .59, .2, .01)), n)
 
@@ -163,6 +165,6 @@ benchmark(
   IBS_kernel_R(mydata),
   IBS_kernel_C(mydata),
   IBS_kernel_C_parallel(mydata),
-replications=100,
+replications=300,
 order="relative")[, 1:4]
 ```
