@@ -32,9 +32,9 @@ author:
 
 footer-links-active:
   rss: true
-  facebook: true
+  facebook: false
   email: true
-  twitter: false
+  twitter: true
   github: true
   linkedin: true
   stackoverflow: false
