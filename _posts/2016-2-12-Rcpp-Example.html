@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Rcpp example for parallelly calculating a kernel matrix
+content: “Sometimes R code just isn’t fast enough.” With the help of the profiling tools such as the <a href="https://github.com/rstudio/profvis">profvis</a> package, it is possible to figure out the bottlenecks of your code. However some of them (unavoidable loops, recursive functions, etc.) cannot be speed up in R no matter what you do. Another option to improve your code performance is to rewrite key functions in c++.
 ---
 
 <!DOCTYPE html>
