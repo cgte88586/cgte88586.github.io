@@ -1,0 +1,175 @@
+---
+layout: post
+title: "Rcpp example for parallelly calculating a kernel matrix"
+---
+
+
+
+## Overview
+
+"Sometimes R code just isn't fast enough." With the help of the profiling tools such as the [profvis](https://github.com/rstudio/profvis) package, it is possible to figure out the bottlenecks of your code. However some of them (unavoidable loops, recursive functions, etc.) cannot be speed up in R no matter what you do. Another option to improve your code performance is to rewrite key functions in c++.
+
+This post decribes using R Packages [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html) and [RcppParallel](http://rcppcore.github.io/RcppParallel/) to parallelly compute the identical by state (IBS) kernel in R. The computation of the IBS kernel involves unavoidable loops, which is known to be painful in R. `Rcpp` makes it very simple to connect C++ to R by providing a clean and approachable API. `RcppParallel` provides a complete toolkit for creating portable, high-performance parallel algorithms without requiring direct manipulation of operating system threads.
+
+## IBS kernel
+
+For genotype data analysis, the design of kernels that can effectively capture genomic similarity between subjects is critical to success of any kernel-based methods. The popular Gaussian kernel works well for continuous predictors, but can perform poorly on categorical predictors such as SNPs. The IBS kernel, on the other hand, is crafted for SNP data and calculates the distance between two individuals with genotyp vectors $\boldsymbol{x}_i$ and $\boldsymbol{x}_j$ coded by numbers of minor alleles as
+$$K(\boldsymbol{x}_i, \boldsymbol{x}_j) =  \frac{\sum_{s=1}^p 2I(x_{is}=x_{js}) + I(|x_{is}-x_{js}|=1)}{2p}.$$
+
+## Implementation in R
+
+As a baseline, I start with the implementation of IBS kernel `IBS_kernel_R()` in plain R.
+
+
+{% highlight r %}
+IBS_kernel_R<- function(X) {
+  n <- nrow(X)
+  
+  # absolute difference of two numbers
+  abs_diff <- function(x1, x2) {
+    y <- abs(x1 - x2)
+    # exclude missing values
+    return(y[!is.na(y)])
+  }
+  
+  out <- matrix(0, n, n)
+  
+  for (i in 2:n) {
+    for (j in 1:(i-1)) {
+      y <- abs_diff(X[i, ], X[j, ])
+      out[i, j] <- 1 - 0.5 * sum(y) / length(y)
+    }
+  }
+  return(out)
+}
+{% endhighlight %}
+
+## Implementation with Rcpp
+
+Here I re-implement the IBS kernel calculation `IBS_kernel_C()` in a `.cpp` file and it can be sourced using function `sourceCpp()`.
+
+
+{% highlight cpp %}
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// define both_non_NA(a, b)
+inline bool both_non_NA(double a, double b) {
+  return (!ISNAN(a) && !ISNAN(b));
+}
+
+// [[Rcpp::export]]
+NumericMatrix IBS_kernel_C(NumericMatrix X) {
+  int n = X.nrow(), p = X.ncol();
+  // allocate the output matrix
+  NumericMatrix out(n, n);
+  
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < i; j++) {
+      int dist = 0, count = 0;
+      for (int k = 0; k < p; k++) {
+        double xi = X(i, k), xj = X(j, k);
+        if (both_non_NA(xi, xj)) {
+          dist += abs(xi - xj);
+          count++;
+        }
+      }
+      out(i, j) = 1 - .5 * dist / count;
+    }
+  }
+  return out;
+}
+{% endhighlight %}
+
+## Parallel version with RcppParallel
+
+The parallel version `IBS_kernel_C_parallel()` is straightforward to implement with the help of `RMatrix` accessor class provided by `RcppParallel`. The main difference to `IBS_kernel_C()` is that the outer loop now starts with the `begin` index passed to the worker function rather than 0.
+
+
+{% highlight cpp %}
+// [[Rcpp::depends(RcppParallel)]]
+#include <Rcpp.h>
+#include <RcppParallel.h>
+using namespace RcppParallel;
+
+// define both_non_NA(a, b)
+inline bool both_non_NA(double a, double b) {
+  return (!ISNAN(a) && !ISNAN(b));
+}
+
+struct IBSKernel : public Worker
+{
+  // source matrix
+  const RMatrix<double> X;
+  
+  // destination matrix
+  RMatrix<double> out;
+  
+  // initialize with source and destination
+  IBSKernel(const Rcpp::NumericMatrix X, Rcpp::NumericMatrix out) 
+  : X(X), out(out) {}
+  
+  // calculate the IBS kernel of the range of elements requested
+  void operator()(std::size_t begin, std::size_t end) {
+    int p = X.ncol();
+    for (std::size_t i = begin; i < end; i++) {
+      for (std::size_t j = 0; j < i; j++) {
+        int dist = 0, count = 0;
+        for (int k = 0; k < p; k++) {
+          double xi = X(i, k), xj = X(j, k);
+          if (both_non_NA(xi, xj)) {
+            dist += abs(xi - xj);
+            count++;
+          }
+        }
+        out(i, j) = 1 - .5 * dist / count;
+      }
+    }
+  }
+};
+
+// [[Rcpp::export]]
+Rcpp::NumericMatrix IBS_kernel_C_parallel(Rcpp::NumericMatrix X) {
+  
+  // allocate the output matrix
+  Rcpp::NumericMatrix out(X.nrow(), X.nrow());
+  
+  // IBSKernel functor (pass input and output matrixes)
+  IBSKernel ibskernel(X, out);
+  
+  // call parallelFor to do the work
+  parallelFor(0, X.nrow(), ibskernel);
+  
+  // return the output matrix
+  return out;
+}
+{% endhighlight %}
+
+## Conclusion
+
+We now compare the performance of the three implementations: R, Rcpp and parallel Rcpp. The run time is recorded on a standard laptop computer with 2.9 GHz Inter i7 CPU (2 cores). The Rcpp version yields a 2.5x speedup over straight R code. The parallel version provides another 2.5x speedup, amounting to a total gain of 6x compared to the original R version.
+
+
+{% highlight r %}
+# create a dataset
+set.seed(2016)
+n <- 10
+p <- 1e4
+mydata <- matrix(sample(c(0:2, NA), n * p, replace=T, prob=c(.2, .59, .2, .01)), n)
+
+benchmark(
+  IBS_kernel_R(mydata),
+  IBS_kernel_C(mydata),
+  IBS_kernel_C_parallel(mydata),
+replications=300,
+order="relative")[, 1:4]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##                            test replications elapsed relative
+## 3 IBS_kernel_C_parallel(mydata)          300    0.76    1.000
+## 2          IBS_kernel_C(mydata)          300    1.85    2.434
+## 1          IBS_kernel_R(mydata)          300    4.81    6.329
+{% endhighlight %}
