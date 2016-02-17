@@ -5,16 +5,21 @@ title: "Rcpp example for parallelly calculating a kernel matrix"
 
 
 
-## Overview
-
 "Sometimes R code just isn't fast enough." With the help of the profiling tools such as the [profvis](https://github.com/rstudio/profvis) package, it is possible to figure out the bottlenecks of your code. However some of them (unavoidable loops, recursive functions, etc.) cannot be speed up in R no matter what you do. Another option to improve your code performance is to rewrite key functions in c++.
 
 This post decribes using R Packages [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html) and [RcppParallel](http://rcppcore.github.io/RcppParallel/) to parallelly compute the identical by state (IBS) kernel in R. The computation of the IBS kernel involves unavoidable loops, which is known to be painful in R. `Rcpp` makes it very simple to connect C++ to R by providing a clean and approachable API. `RcppParallel` provides a complete toolkit for creating portable, high-performance parallel algorithms without requiring direct manipulation of operating system threads.
 
+## Prerequisites
+
+The source code of this post is [here](https://github.com/zhoujli/zhoujli.github.io/blob/master/_source/2016-2-12-Rcpp-Example.Rmd). To reproduce it, you will need
+
+* [Rtools](https://cran.r-project.org/bin/windows/Rtools/)
+* `install.packages('Rcpp')`
+* `install.packages('RcppParallel')`
+
 ## IBS kernel
 
-For genotype data analysis, the design of kernels that can effectively capture genomic similarity between subjects is critical to success of any kernel-based methods. The popular Gaussian kernel works well for continuous predictors, but can perform poorly on categorical predictors such as SNPs. The IBS kernel, on the other hand, is crafted for SNP data and calculates the distance between two individuals with genotyp vectors $\boldsymbol{x}_i$ and $\boldsymbol{x}_j$ coded by numbers of minor alleles as
-$$K(\boldsymbol{x}_i, \boldsymbol{x}_j) =  \frac{\sum_{s=1}^p 2I(x_{is}=x_{js}) + I(|x_{is}-x_{js}|=1)}{2p}.$$
+For genotype data analysis, the design of kernels that can effectively capture genomic similarity between subjects is critical to success of any kernel-based methods. The popular Gaussian kernel works well for continuous predictors, but can perform poorly on categorical predictors such as SNPs. The IBS kernel, on the other hand, is crafted for SNP data and calculates the distance between two individuals (check out this [paper](https://bioinformatics.oxfordjournals.org/content/28/18/i375.full) for the formulation of IBS kernel).
 
 ## Implementation in R
 
@@ -169,7 +174,7 @@ order="relative")[, 1:4]
 
 {% highlight text %}
 ##                            test replications elapsed relative
-## 3 IBS_kernel_C_parallel(mydata)          300    0.76    1.000
-## 2          IBS_kernel_C(mydata)          300    1.85    2.434
-## 1          IBS_kernel_R(mydata)          300    4.81    6.329
+## 3 IBS_kernel_C_parallel(mydata)          300    0.78    1.000
+## 2          IBS_kernel_C(mydata)          300    1.76    2.256
+## 1          IBS_kernel_R(mydata)          300    4.53    5.808
 {% endhighlight %}
