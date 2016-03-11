@@ -8,7 +8,7 @@ title: "A Spark Tutorial: Part I"
 You can check out this [page](http://spark.apache.org/community.html#history) for more background on Spark.
 
 ## Why Spark?
-As declared on its webpage, Spark
+Quoted from its webpage, Spark
 
 > Run programs up to 100x faster than Hadoop MapReduce in memory, or 10x faster on disk.
 
