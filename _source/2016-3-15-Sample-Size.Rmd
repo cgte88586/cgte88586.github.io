@@ -1,0 +1,6 @@
+---
+layout: post
+title: "Rare event and statistical significance"
+---
+
+Rare events are of great interest for companies providing large-scale online services (LSOS). They may care about rare behaviors done by users such as comments, subscriptions or clicks even if the vast majority of user sessions do not involve such behaviors. Why such rare events matter? A LSOS like Facebook or LinkedIn usually have very low variable costs (marginal cost to support one more user request). Such low variable costs allow the LSOS for a business model in which it only monetizes through rare events while making the bulk of user interactions free. This [post](http://www.unofficialgoogledatascience.com/2016_01_01_archive.html) points that a very large sample size, compared to traditional exmepriments, is required for an LSOS to detect an effect on rare event metrics.
