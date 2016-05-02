@@ -5,7 +5,7 @@ title: "Rcpp example for parallelly calculating a kernel matrix"
 
 
 
-"Sometimes R code just isn't fast enough." With the help of the profiling tools such as the [profvis](https://github.com/rstudio/profvis) package, it is possible to figure out the bottlenecks of your code. However some of them (unavoidable loops, recursive functions, etc.) cannot be speed up in R no matter what you do. Another option to improve your code performance is to rewrite key functions in c++.
+"Sometimes R code just isn't fast enough." With the help of the profiling tools such as the [profvis](https://github.com/rstudio/profvis) package, it is possible to figure out the bottlenecks of your code. However some of them (unavoidable loops, recursive functions, etc.) cannot be speed up in R no matter what you do. Another option to improve your code performance is to rewrite key functions in C++.
 
 This post decribes using R Packages [Rcpp](https://cran.r-project.org/web/packages/Rcpp/index.html) and [RcppParallel](http://rcppcore.github.io/RcppParallel/) to parallelly compute the identical by state (IBS) kernel in R. The computation of the IBS kernel involves unavoidable loops, which is known to be painful in R. `Rcpp` makes it very simple to connect C++ to R by providing a clean and approachable API. `RcppParallel` provides a complete toolkit for creating portable, high-performance parallel algorithms without requiring direct manipulation of operating system threads.
 
