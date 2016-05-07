@@ -11,4 +11,4 @@ My name is Zhou (Joe) Li and I am a Ph.D. Student in [Statistics at NC State Uni
 
 ### Contact me
 
-[zli15 AT ncsu.edu](mailto:benlz1989@gmail.com)
+[zli15 AT ncsu.edu](mailto:zli15@ncsu.edu)
