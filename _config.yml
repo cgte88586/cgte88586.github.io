@@ -23,10 +23,10 @@ navbar-links:
 
 author:
   name: Zhou (Joe) Li
-  email: "zli15@ncsu.edu"
+  email: "benlz1989@gmail.com"
   facebook: benlz1989  # eg. daattali
   github: zhoujli    # eg. daattali
-  twitter: yourname   # eg. daattali
+  twitter: ZhouLi9   # eg. daattali
   linkedin: in/zhouli89  # eg. "pub/dean-attali/8/946/143"
   stackoverflow: yourlink  # eg. "3943160/daattali"
 
@@ -52,7 +52,7 @@ google_analytics: "UA-73356853-1"
 # --- Don't need to touch anything below here (but you can if you want) --- #
 
 # Output options (more information on Jekyll's site)
-timezone: "America/New_York"
+timezone: "America/San_Francisco"
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
